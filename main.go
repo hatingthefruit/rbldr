@@ -15,7 +15,7 @@ limitations under the License.
 */
 package main
 
-import "github.com/hatingthefruit/rbldr.git/cmd"
+import "github.com/hatingthefruit/rbldr/cmd"
 
 func main() {
 	cmd.Execute()
