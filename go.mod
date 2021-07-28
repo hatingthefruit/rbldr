@@ -1,3 +1,5 @@
-module github.com/hatingthefruit/rbuildr
+module github.com/hatingthefruit/rbldr
 
-go 1.12
+go 1.16
+
+require github.com/spf13/cobra v1.2.1 // indirect
