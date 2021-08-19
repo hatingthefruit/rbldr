@@ -17,12 +17,9 @@ package main
 
 import (
 	"bufio"
-	"encoding/json"
 	"flag"
-	"fmt"
 	"os"
 
-	"github.com/hatingthefruit/rbldr/models"
 	"github.com/hatingthefruit/rbldr/util"
 )
 
@@ -34,16 +31,16 @@ func main() {
 	var inputFile, outputFile *os.File
 	var inputErr error
 	if len(allArgs) == 0 {
-		fmt.Println("pulling from stdin, printing to stdout")
+		//fmt.Println("pulling from stdin, printing to stdout")
 		inputFile = os.Stdin
 		outputFile = os.Stdout
 	} else if len(allArgs) == 1 {
-		fmt.Printf("Pulling from %s, printing to stdout\n", allArgs[0])
+		//fmt.Printf("Pulling from %s, printing to stdout\n", allArgs[0])
 		inputFile, inputErr = os.Open(allArgs[0])
 		util.CheckErr(inputErr)
 		outputFile = os.Stdout
 	} else {
-		fmt.Printf("Infile %s and outfile %s\n", allArgs[0], allArgs[1])
+		//fmt.Printf("Infile %s and outfile %s\n", allArgs[0], allArgs[1])
 
 		inputFile, inputErr = os.Open(allArgs[0])
 		util.CheckErr(inputErr)
@@ -55,48 +52,13 @@ func main() {
 	defer inputFile.Close()
 	defer outputFile.Close()
 
-	resDecoder := json.NewDecoder(inputFile)
-
-	var resDef models.ResumeDefinition
-	err := resDecoder.Decode(&resDef)
-	util.CheckErr(err)
-
-	var finalResume models.Resume
-
-	contactFile, err := os.Open(resDef.Root + resDef.Contact + ".json")
-	util.CheckErr(err)
-	defer contactFile.Close()
-
-	contactDecoder := json.NewDecoder(contactFile)
-	contactDecoder.Decode(&finalResume.Contact)
-
-	for i := 0; i < len(resDef.Education); i++ {
-		eduFile, err := os.Open(resDef.Root + resDef.Education[i] + ".json")
-		defer eduFile.Close()
-		util.CheckErr(err)
-
-		var latestEdu models.Education
-		json.NewDecoder(eduFile).Decode(&latestEdu)
-
-		finalResume.Education = append(finalResume.Education, latestEdu)
-	}
-
-	for i := 0; i < len(resDef.Experience); i++ {
-		expFile, err := os.Open(resDef.Root + resDef.Experience[i] + ".json")
-		defer expFile.Close()
-		util.CheckErr(err)
-
-		var latestExp models.Experience
-		json.NewDecoder(expFile).Decode(&latestExp)
-
-		finalResume.Experience = append(finalResume.Experience, latestExp)
-	}
+	finalResume := util.NewResume(inputFile)
 
 	//fmt.Println(finalResume)
 
 	rWriter := bufio.NewWriter(outputFile)
 	buildResume := util.BuildResume(finalResume, *template)
-	_, err = rWriter.WriteString(buildResume)
+	_, err := rWriter.WriteString(buildResume)
 	util.CheckErr(err)
 	rWriter.Flush()
 }

@@ -9,7 +9,11 @@
     ],
     "experience": [
         "experience/usaaintern",
+        "experience/armyempty",
         "experience/networklead",
         "experience/networkadmin"
+    ],
+    "other": [
+        "interests"
     ]
 }

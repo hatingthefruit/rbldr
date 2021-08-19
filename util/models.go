@@ -1,4 +1,4 @@
-package models
+package util
 
 type Date struct {
 	Day   string `json:"day"`
@@ -10,6 +10,7 @@ type Experience struct {
 	Role             string   `json:"role"`
 	Employer         string   `json:"employer"`
 	Location         string   `json:"location"`
+	Current          bool     `json:"current"`
 	StartDate        Date     `json:"start_date"`
 	EndDate          Date     `json:"end_date"`
 	Responsibilities []string `json:"responsibilities"`
@@ -41,6 +42,7 @@ type ResumeDefinition struct {
 	Profile    string   `json:"profile"`
 	Education  []string `json:"education"`
 	Experience []string `json:"experience"`
+	Other      []string `json:"other"`
 }
 
 type Resume struct {
@@ -48,4 +50,5 @@ type Resume struct {
 	Profile    []string
 	Education  []Education
 	Experience []Experience
+	Other      map[string]map[string]string
 }
