@@ -2,7 +2,7 @@ package models
 
 type Date struct {
 	Day   string `json:"day"`
-	Month string `json:"month`
+	Month string `json:"month"`
 	Year  string `json:"year"`
 }
 
@@ -12,7 +12,7 @@ type Experience struct {
 	Location         string   `json:"location"`
 	StartDate        Date     `json:"start_date"`
 	EndDate          Date     `json:"end_date"`
-	responsibilities []string `json:"responsibilities"`
+	Responsibilities []string `json:"responsibilities"`
 }
 
 type Education struct {
@@ -21,7 +21,7 @@ type Education struct {
 	CertName     string  `json:"cert_name"`
 	Graduated    bool    `json:"graduated"`
 	GradDate     Date    `json:"grad_date"`
-	Gpa          float64 `json:"gpa`
+	Gpa          float64 `json:"gpa"`
 }
 
 type Contact struct {
@@ -36,6 +36,7 @@ type Cert struct {
 }
 
 type ResumeDefinition struct {
+	Root       string   `json:"root"`
 	Contact    string   `json:"contact"`
 	Profile    string   `json:"profile"`
 	Education  []string `json:"education"`

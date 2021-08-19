@@ -1,0 +1,15 @@
+{
+    "root": "../resume/",
+    "contact": "contact_info",
+    "profile": "profile",
+    "education": [
+        "education/utsa",
+        "education/acc",
+        "education/ait"
+    ],
+    "experience": [
+        "experience/usaaintern",
+        "experience/networklead",
+        "experience/networkadmin"
+    ]
+}

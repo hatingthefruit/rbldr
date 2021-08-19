@@ -1,0 +1,4 @@
+\begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+  \textbf{\Large %s}} & Email : \href{mailto:%s}{%s}\\
+   & Mobile : %s \\
+\end{tabular*}

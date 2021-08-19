@@ -16,7 +16,9 @@ limitations under the License.
 package main
 
 import (
+	"bufio"
 	"encoding/json"
+	"flag"
 	"fmt"
 	"os"
 
@@ -26,6 +28,8 @@ import (
 
 func main() {
 	allArgs := os.Args[1:]
+	template := flag.String("template", "default", "Name of template to use")
+	flag.Parse()
 
 	var inputFile, outputFile *os.File
 	var inputErr error
@@ -59,7 +63,7 @@ func main() {
 
 	var finalResume models.Resume
 
-	contactFile, err := os.Open(resDef.Contact + ".json")
+	contactFile, err := os.Open(resDef.Root + resDef.Contact + ".json")
 	util.CheckErr(err)
 	defer contactFile.Close()
 
@@ -67,8 +71,10 @@ func main() {
 	contactDecoder.Decode(&finalResume.Contact)
 
 	for i := 0; i < len(resDef.Education); i++ {
-		eduFile, err := os.Open(resDef.Education[i] + ".json")
+		eduFile, err := os.Open(resDef.Root + resDef.Education[i] + ".json")
+		defer eduFile.Close()
 		util.CheckErr(err)
+
 		var latestEdu models.Education
 		json.NewDecoder(eduFile).Decode(&latestEdu)
 
@@ -76,11 +82,21 @@ func main() {
 	}
 
 	for i := 0; i < len(resDef.Experience); i++ {
-		expFile, err := os.Open(resDef.Education[i] + ".json")
+		expFile, err := os.Open(resDef.Root + resDef.Experience[i] + ".json")
+		defer expFile.Close()
 		util.CheckErr(err)
+
 		var latestExp models.Experience
 		json.NewDecoder(expFile).Decode(&latestExp)
 
 		finalResume.Experience = append(finalResume.Experience, latestExp)
 	}
+
+	//fmt.Println(finalResume)
+
+	rWriter := bufio.NewWriter(outputFile)
+	buildResume := util.BuildResume(finalResume, *template)
+	_, err = rWriter.WriteString(buildResume)
+	util.CheckErr(err)
+	rWriter.Flush()
 }
