@@ -31,7 +31,7 @@ func (exp Experience) MonthRange() string {
 }
 
 func EscapeCharacters(input string) string {
-	invalidChars := []string{"$", "&"}
+	invalidChars := []string{"$", "&", "%"}
 	for _, char := range invalidChars {
 		input = strings.ReplaceAll(input, char, "\\"+char)
 	}

@@ -44,7 +44,7 @@ func main() {
 
 		inputFile, inputErr = os.Open(allArgs[0])
 		util.CheckErr(inputErr)
-		outputFile, inputErr = os.Open(allArgs[1])
+		outputFile, inputErr = os.Create(allArgs[1])
 		util.CheckErr(inputErr)
 
 	}

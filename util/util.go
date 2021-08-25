@@ -37,7 +37,7 @@ func BuildResume(resume Resume, template string) string {
 			}
 		} else if section == "Experience" {
 			for _, exp := range resume.Experience {
-				itemStr += fmt.Sprintf(fileMap["sectionItem"], exp.Employer, exp.Location, exp.Role, exp.MonthRange())
+				itemStr += fmt.Sprintf(fileMap["sectionItem"], exp.Employer, exp.MonthRange(), exp.Role, exp.Location)
 				if len(exp.Responsibilities) > 0 {
 					listStr = ""
 					for _, resp := range exp.Responsibilities {
