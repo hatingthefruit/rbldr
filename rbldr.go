@@ -25,7 +25,7 @@ import (
 
 func main() {
 	allArgs := os.Args[1:]
-	template := flag.String("template", "default", "Name of template to use")
+	template := flag.String("template", "templates/default", "Name of template to use")
 	flag.Parse()
 
 	var inputFile, outputFile *os.File

@@ -13,7 +13,7 @@ func CheckErr(e error) {
 }
 
 func BuildResume(resume Resume, template string) string {
-	rootPath := "templates/" + template + "/"
+	rootPath := template + "/"
 	files, err := ioutil.ReadDir(rootPath)
 	CheckErr(err)
 	fileMap := make(map[string]string)
