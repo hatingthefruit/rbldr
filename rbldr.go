@@ -19,7 +19,6 @@ import (
 	"bufio"
 	"encoding/json"
 	"flag"
-	"fmt"
 	"log"
 	"os"
 
@@ -32,8 +31,6 @@ func main() {
 	ifName := flag.String("if", "", "Input file name; default is STDIN")
 	ofName := flag.String("of", "", "Output file name; default is STDOUT")
 	flag.Parse()
-
-	fmt.Println(*resumeDir)
 
 	var inputFile, outputFile *os.File
 	var inputErr error
