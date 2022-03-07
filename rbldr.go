@@ -17,7 +17,9 @@ package main
 
 import (
 	"bufio"
+	"encoding/json"
 	"flag"
+	"log"
 	"os"
 
 	"github.com/hatingthefruit/rbldr/util"
@@ -25,7 +27,7 @@ import (
 
 func main() {
 	allArgs := os.Args[1:]
-	template := flag.String("template", "templates/default", "Name of template to use")
+	templateName := flag.String("template", "templates/default.json", "Name of template to use")
 	flag.Parse()
 
 	var inputFile, outputFile *os.File
@@ -57,8 +59,17 @@ func main() {
 	//fmt.Println(finalResume)
 
 	rWriter := bufio.NewWriter(outputFile)
-	buildResume := util.BuildResume(finalResume, *template)
-	_, err := rWriter.WriteString(buildResume)
+
+	templateFile, err := os.Open(*templateName)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	var template util.Template
+	json.NewDecoder(templateFile).Decode(&template)
+
+	buildResume := util.BuildResume(finalResume, template)
+	_, err = rWriter.WriteString(buildResume)
 	util.CheckErr(err)
 	rWriter.Flush()
 }

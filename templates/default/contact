@@ -1,5 +1,0 @@
-
-\begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
-  \textbf{\Large %s} & Email : \href{mailto:%s}{%s}\\
-   & Phone : %s \\
-\end{tabular*}

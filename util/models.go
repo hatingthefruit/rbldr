@@ -52,3 +52,15 @@ type Resume struct {
 	Experience []Experience
 	Other      map[string]map[string]string
 }
+
+type Template struct {
+	Base        string `json:"base"`
+	Contact     string `json:"contact"`
+	End         string `json:"end"`
+	Item        string `json:"item"`
+	ItemList    string `json:"itemList"`
+	Order       string `json:"order"`
+	SectionBase string `json:"sectionBase"`
+	SectionItem string `json:"sectionItem"`
+	SkillItem   string `json:"skillItem"`
+}
