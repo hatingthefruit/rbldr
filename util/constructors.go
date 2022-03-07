@@ -6,12 +6,13 @@ import (
 	"os"
 )
 
-func NewResume(def *os.File) Resume {
+func NewResume(def *os.File, resumeDir string) Resume {
 	resDecoder := json.NewDecoder(def)
 
 	var resDef ResumeDefinition
 	err := resDecoder.Decode(&resDef)
 	CheckErr(err)
+	resDef.Root = resumeDir
 
 	var finalResume Resume
 

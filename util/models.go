@@ -37,7 +37,7 @@ type Cert struct {
 }
 
 type ResumeDefinition struct {
-	Root       string   `json:"root"`
+	Root       string
 	Contact    string   `json:"contact"`
 	Profile    string   `json:"profile"`
 	Education  []string `json:"education"`
