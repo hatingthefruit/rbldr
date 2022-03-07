@@ -19,6 +19,7 @@ import (
 	"bufio"
 	"encoding/json"
 	"flag"
+	"fmt"
 	"log"
 	"os"
 
@@ -26,35 +27,34 @@ import (
 )
 
 func main() {
-	allArgs := os.Args[1:]
 	templateName := flag.String("template", "templates/default.json", "Name of template to use")
+	resumeDir := flag.String("resumedir", "", "Location of resume files")
+	ifName := flag.String("if", "", "Input file name; default is STDIN")
+	ofName := flag.String("of", "", "Output file name; default is STDOUT")
 	flag.Parse()
+
+	fmt.Println(*resumeDir)
 
 	var inputFile, outputFile *os.File
 	var inputErr error
-	if len(allArgs) == 0 {
+	if *ifName == "" {
 		//fmt.Println("pulling from stdin, printing to stdout")
 		inputFile = os.Stdin
-		outputFile = os.Stdout
-	} else if len(allArgs) == 1 {
-		//fmt.Printf("Pulling from %s, printing to stdout\n", allArgs[0])
-		inputFile, inputErr = os.Open(allArgs[0])
+	} else {
+		inputFile, inputErr = os.Open(*ifName)
 		util.CheckErr(inputErr)
+	}
+	if *ofName == "" {
 		outputFile = os.Stdout
 	} else {
-		//fmt.Printf("Infile %s and outfile %s\n", allArgs[0], allArgs[1])
-
-		inputFile, inputErr = os.Open(allArgs[0])
+		outputFile, inputErr = os.Create(*ofName)
 		util.CheckErr(inputErr)
-		outputFile, inputErr = os.Create(allArgs[1])
-		util.CheckErr(inputErr)
-
 	}
 
 	defer inputFile.Close()
 	defer outputFile.Close()
 
-	finalResume := util.NewResume(inputFile)
+	finalResume := util.NewResume(inputFile, *resumeDir)
 
 	//fmt.Println(finalResume)
 
