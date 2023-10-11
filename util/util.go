@@ -33,25 +33,27 @@ func BuildResume(resume Resume, template Template) string {
 					itemStr += fmt.Sprintf(template.ItemList, listStr)
 				}
 			}
+		} else {
+			for section, value := range resume.Other {
+				//var itemStr,
+				var listStr, sectionStr string
+				for bold, item := range value {
+					if len(item) > 0 {
+						listStr += fmt.Sprintf(template.SkillItem, bold, item)
+					}
+				}
+				//itemStr = fmt.Sprintf(template.ItemList, listStr)
+				sectionStr += fmt.Sprintf(template.SectionBase, section, listStr)
+				sectionStr = EscapeCharacters(sectionStr)
+				outStr += sectionStr
+			}
 		}
 		sectionStr += fmt.Sprintf(template.SectionBase, section, itemStr)
 		sectionStr = EscapeCharacters(sectionStr)
 		outStr += sectionStr
 	}
 
-	for section, value := range resume.Other {
-		//var itemStr,
-		var listStr, sectionStr string
-		for bold, item := range value {
-			if len(item) > 0 {
-				listStr += fmt.Sprintf(template.SkillItem, bold, item)
-			}
-		}
-		//itemStr = fmt.Sprintf(template.ItemList, listStr)
-		sectionStr += fmt.Sprintf(template.SectionBase, section, listStr)
-		sectionStr = EscapeCharacters(sectionStr)
-		outStr += sectionStr
-	}
+	
 
 	outStr += template.End
 	return outStr
