@@ -47,13 +47,9 @@ func BuildResume(resume Resume, template Template) string {
 				sectionStr = EscapeCharacters(sectionStr)
 				outStr += sectionStr
 			}
-		}
-		sectionStr += fmt.Sprintf(template.SectionBase, section, itemStr)
-		sectionStr = EscapeCharacters(sectionStr)
-		outStr += sectionStr
-	}
 
-	
+		}
+	}
 
 	outStr += template.End
 	return outStr
