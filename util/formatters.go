@@ -35,5 +35,10 @@ func EscapeCharacters(input string) string {
 	for _, char := range invalidChars {
 		input = strings.ReplaceAll(input, char, "\\"+char)
 	}
+	modifiedChars := map[string]string{"~": "$\\sim$"}
+	for char, replace := range modifiedChars {
+		input = strings.ReplaceAll(input, char, replace)
+	}
+
 	return input
 }
