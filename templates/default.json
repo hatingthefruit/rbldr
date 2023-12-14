@@ -4,7 +4,7 @@
     "end": "\n\\end{document}",
     "item": "\n      \\resumeItem\n        {%s}",
     "itemList": "\n    \\resumeItemListStart\n    %s\n    \\resumeItemListEnd",
-    "order": "Experience\nEducation",
+    "order": "Experience\nOther\nEducation",
     "sectionBase": "\n\\section{%s}\n  \\resumeSubHeadingListStart\n  %s\n  \\resumeSubHeadingListEnd",
     "sectionItem": "\n  \\resumeSubheading\n    {%s}{%s}\n    {%s}{%s}",
     "skillItem": "\n      \\skillItem{%s}\n        {%s}"
