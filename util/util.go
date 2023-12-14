@@ -22,6 +22,10 @@ func BuildResume(resume Resume, template Template) string {
 			for _, edu := range resume.Education {
 				itemStr += fmt.Sprintf(template.SectionItem, edu.Organization, edu.GradString(), edu.CertName, edu.FormattedGPA())
 			}
+
+			sectionStr += fmt.Sprintf(template.SectionBase, section, itemStr)
+			sectionStr = EscapeCharacters(sectionStr)
+			outStr += sectionStr
 		} else if section == "Experience" {
 			for _, exp := range resume.Experience {
 				itemStr += fmt.Sprintf(template.SectionItem, exp.Employer, exp.MonthRange(), exp.Role, exp.Location)
@@ -33,6 +37,10 @@ func BuildResume(resume Resume, template Template) string {
 					itemStr += fmt.Sprintf(template.ItemList, listStr)
 				}
 			}
+
+			sectionStr += fmt.Sprintf(template.SectionBase, section, itemStr)
+			sectionStr = EscapeCharacters(sectionStr)
+			outStr += sectionStr
 		} else if section == "Other" {
 			for section, value := range resume.Other {
 				//var itemStr,
@@ -48,9 +56,6 @@ func BuildResume(resume Resume, template Template) string {
 				outStr += sectionStr
 			}
 		}
-		sectionStr += fmt.Sprintf(template.SectionBase, section, itemStr)
-		sectionStr = EscapeCharacters(sectionStr)
-		outStr += sectionStr
 	}
 
 	outStr += template.End
