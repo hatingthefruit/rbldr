@@ -24,6 +24,18 @@ func (edu Education) GradString() string {
 	return gradString
 }
 
+func (exp Experience) StartMonth() string {
+	return exp.StartDate.MonthYearFormat()
+}
+
+func (exp Experience) EndMonth() string {
+	return exp.EndDate.MonthYearFormat()
+}
+
+func (d Date) MonthYearFormat() string {
+	return d.Month + " " + d.Year
+}
+
 func (exp Experience) MonthRange() string {
 	startDate := exp.StartDate.Month + " " + exp.StartDate.Year
 	endDate := exp.EndDate.Month + " " + exp.EndDate.Year
