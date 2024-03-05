@@ -34,12 +34,12 @@
 % skills section
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section*{\href{https://www.reddit.com/r/EngineeringResumes/wiki/index\#wiki_skills}{Skills}}
-\textbf{CAD:} Siemens NX, CATIA V5, SolidWorks \\
-\textbf{Analysis:} Thermal Desktop, Abaqus, LS-DYNA, STAR-CCM+
-
+{{with .Other.Skills}}
+\section*{Skills}
+{{ range $key, $value := .}}
+\textbf{ {{- $key -}} } {{$value}} \\{{end}}
 \vspace{-6.5pt}
-
+{{end}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % experience section
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -50,7 +50,7 @@
 \textbf{ {{- .Role -}} } {{.Employer}}{{ if .Location }} -- {{.Location}} {{end}} \hfill {{.StartMonth}} -- {{.EndMonth}} \\
 \vspace{-9pt}
 \begin{itemize}{{range .Responsibilities}}
-  \item {{.}}{{end}}
+  \item {{escapeCharacters .}}{{end}}
 \end{itemize}
 
 {{end}}
